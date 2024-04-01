@@ -17,6 +17,8 @@ function findGetParameter(parameterName) {
 }
 
 var messages = [
+    "Can you think of a single chore to do?",
+    "Mentally think of what you're actually looking for",
     "Go finish your to-do list first",
     "Work, addition, rejection",
     "Distraction economy: You evolved to crave information",

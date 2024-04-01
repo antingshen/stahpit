@@ -53,19 +53,18 @@ blockList = [
     "reddit",
     "linkedin",
     "smbc-comics",
-    "curbed"
+    "curbed",
+    "twitter",
+    "x",
 ]
 
 chrome.webRequest.onBeforeRequest.addListener(
     (details) => {
-        if (details.initiator) {
-            return;
-        }
         if (timeLimit != null && timeLimit > Date.now()) {
             return;
         }
         for (let blocked of blockList) {
-            if (extractRootDomain(details.url).includes(blocked)) {
+            if ((!details.initiator || extractRootDomain(details.initiator).includes(blocked)) && extractRootDomain(details.url).includes(blocked)) {
                 let redirect = chrome.extension.getURL("popup.html");
                 return {
                     redirectUrl: `${redirect}?url=${encodeURIComponent(details.url)}`,
